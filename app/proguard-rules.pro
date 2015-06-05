@@ -1,0 +1,5 @@
+-dontwarn retrofit.**
+-dontwarn okio.**
+-keep class retrofit.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions

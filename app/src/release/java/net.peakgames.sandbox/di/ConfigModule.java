@@ -1,4 +1,4 @@
-package net.peakgames.sandbox.config.di;
+package net.peakgames.sandbox.di;
 
 import net.peakgames.mobile.android.log.Logger;
 import net.peakgames.sandbox.di.annotations.LoggerLevel;

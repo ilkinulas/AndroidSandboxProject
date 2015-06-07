@@ -3,7 +3,6 @@ package net.peakgames.sandbox.di;
 import net.peakgames.sandbox.ChatActivity;
 import net.peakgames.sandbox.ChatApp;
 import net.peakgames.sandbox.LoginActivity;
-import net.peakgames.sandbox.config.di.ConfigModule;
 
 import javax.inject.Singleton;
 

@@ -1,6 +1,5 @@
 package net.peakgames.sandbox.di;
 
-
 import android.content.SharedPreferences;
 
 import net.peakgames.mobile.android.log.AndroidLogger;
@@ -19,6 +18,8 @@ import net.peakgames.sandbox.network.ChatService;
 import net.peakgames.sandbox.network.ChatServiceImpl;
 import net.peakgames.sandbox.network.mock.MockChatService;
 
+import org.mockito.Mockito;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -28,30 +29,35 @@ import static android.content.Context.MODE_PRIVATE;
 
 @Module
 public class ChatAppModule {
-
     private ChatApp application;
 
     public ChatAppModule(ChatApp app) {
         this.application = app;
     }
 
-    @Singleton @Provides
+    @Singleton
+    @Provides
     public ChatApp provideApplication() {
         return this.application;
     }
 
-    @Provides @Singleton
+    @Provides
+    @Singleton
     public SharedPreferences provideSharedPreferences(ChatApp app) {
         return app.getSharedPreferences("KimbilirChallenge", MODE_PRIVATE);
     }
 
 
-    @Singleton @Provides @IsMockMode
+    @Singleton
+    @Provides
+    @IsMockMode
     public boolean provideMockMode(@MockMode BooleanPreference mockModePreference) {
         return mockModePreference.get();
     }
 
-    @Singleton @Provides @MockMode
+    @Singleton
+    @Provides
+    @MockMode
     public BooleanPreference provideMockModePreference(SharedPreferences sharedPreferences) {
         return new BooleanPreference(sharedPreferences, "is_mock_mode", false);
     }
@@ -77,16 +83,18 @@ public class ChatAppModule {
         }
     }
 
+
+
+
     @Provides
     @Singleton
     public LoginViewMediator provideLoginViewMediator(Logger log, ChatService chatService) {
-        return new LoginViewMediatorImpl(log,  chatService);
+        return Mockito.mock(LoginViewMediator.class);
     }
 
     @Provides
     @Singleton
     public ChatViewMediator provideChatViewMediator(Logger log, ChatService chatService) {
-        return new ChatViewMediatorImpl(log,  chatService);
+        return new ChatViewMediatorImpl(log, chatService);
     }
-
 }

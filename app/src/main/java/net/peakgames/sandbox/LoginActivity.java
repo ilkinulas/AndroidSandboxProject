@@ -120,4 +120,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
         viewAnimator.setDisplayedChild(viewAnimator.indexOfChild(loginFormContainer));
     }
 
+    //Visible for tests
+    LoginViewMediator getLoginMediator() {
+        return loginMediator;
+    }
 }

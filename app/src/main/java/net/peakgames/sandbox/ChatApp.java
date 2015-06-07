@@ -23,7 +23,7 @@ public class ChatApp extends Application {
         log.i("Chat application created.");
     }
 
-    private void initComponentAndInject() {
+    public void initComponentAndInject() {
         chatAppComponent = ChatAppComponent.Initializer.init(this);
         chatAppComponent.inject(this);
     }

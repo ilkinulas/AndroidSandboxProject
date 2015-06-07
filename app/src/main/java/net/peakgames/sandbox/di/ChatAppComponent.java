@@ -1,9 +1,9 @@
 package net.peakgames.sandbox.di;
 
-import net.peakgames.mobile.android.log.Logger;
+import net.peakgames.sandbox.ChatActivity;
 import net.peakgames.sandbox.ChatApp;
+import net.peakgames.sandbox.LoginActivity;
 import net.peakgames.sandbox.config.di.ConfigModule;
-import net.peakgames.sandbox.network.ChatService;
 
 import javax.inject.Singleton;
 
@@ -14,10 +14,8 @@ import dagger.Component;
 public interface ChatAppComponent {
 
     void inject(ChatApp app);
-
-    Logger logger();
-    ChatApp application();
-    ChatService chatService();
+    void inject(LoginActivity loginActivity);
+    void inject(ChatActivity chatActivity);
 
     class Initializer {
         public static ChatAppComponent init(ChatApp app) {

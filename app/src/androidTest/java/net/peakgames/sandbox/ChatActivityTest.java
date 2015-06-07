@@ -1,12 +1,10 @@
 package net.peakgames.sandbox;
 
-import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import net.peakgames.sandbox.di.ChatComponent;
+import net.peakgames.sandbox.di.ChatAppComponent;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,11 +32,11 @@ public class ChatActivityTest {
 
     @Before
     public void setup() {
-        ChatComponent.Initializer.init(getChatApp());
+        ChatAppComponent.Initializer.init(getChatApp());
     }
 
     @Test
-    public void test1() {
+    public void sendButtonShouldBeEnabledIfTheEditTextIsNotEmpty() {
         onView(withId(R.id.chat_message_edit_text)).perform(clearText());
         onView(withId(R.id.send_chat_message_button)).check(matches(not(isEnabled())));
 

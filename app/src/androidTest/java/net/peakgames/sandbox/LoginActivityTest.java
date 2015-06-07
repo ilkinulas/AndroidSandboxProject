@@ -4,7 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.UiThreadTest;
 
-import net.peakgames.sandbox.di.LoginComponent;
+import net.peakgames.sandbox.di.ChatAppComponent;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -29,7 +29,7 @@ public class LoginActivityTest {
 
     @Before
     public void setup() {
-        LoginComponent.Initializer.init(getChatApp());
+        ChatAppComponent.Initializer.init(getChatApp());
     }
 
     private ChatApp getChatApp() {

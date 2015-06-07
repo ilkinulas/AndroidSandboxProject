@@ -2,10 +2,11 @@ package net.peakgames.sandbox.di.annotations;
 
 import java.lang.annotation.Retention;
 
-import javax.inject.Scope;
+import javax.inject.Qualifier;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Scope
+@Qualifier
 @Retention(RUNTIME)
-public @interface PerActivity {}
+public @interface IsMockMode {
+}

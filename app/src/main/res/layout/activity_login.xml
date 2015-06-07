@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/login_button"
                 android:text="" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -51,13 +52,22 @@
             android:layout_height="fill_parent">
 
             <TextView
+                android:id="@+id/connecting_indicator_text"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Connecting..." />
-
         </RelativeLayout>
 
     </ViewAnimator>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mock Mode"
+        android:id="@+id/mockModeSwitch"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:checked="false" />
 
 
 </RelativeLayout>

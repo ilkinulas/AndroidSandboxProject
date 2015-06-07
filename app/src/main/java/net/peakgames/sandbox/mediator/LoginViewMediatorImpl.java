@@ -22,7 +22,6 @@ public class LoginViewMediatorImpl implements LoginViewMediator {
     public LoginViewMediatorImpl(Logger log, ChatService chatService) {
         this.log = log;
         this.chatService = chatService;
-        log.d("LoginViewMediatorImpl created.");
     }
 
 

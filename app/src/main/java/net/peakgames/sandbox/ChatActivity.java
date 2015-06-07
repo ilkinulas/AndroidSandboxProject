@@ -6,12 +6,15 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.peakgames.sandbox.di.ChatComponent;
+import com.squareup.picasso.Picasso;
+
 import net.peakgames.sandbox.mediator.ChatViewMediator;
 import net.peakgames.sandbox.view.ChatView;
 
@@ -104,7 +107,7 @@ public class ChatActivity extends BaseActivity implements ChatView {
 
     private void injectDependencies() {
         ButterKnife.inject(this);
-        ChatComponent.Initializer.init(getChatApplication()).inject(this);
+        getChatApplication().getChatAppComponent().inject(this);
         chatViewMediator.setView(this);
     }
 
@@ -112,17 +115,19 @@ public class ChatActivity extends BaseActivity implements ChatView {
     public void onSendButtonClicked() {
         String message = chatMessageEditText.getText().toString();
         chatViewMediator.sendMessage(message);
-        this.adapter.addItem(message);
-        recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+        addMessageToRecyclerView(message);
         chatMessageEditText.setText("");
     }
 
     @Override
     public void onNewChatMessage(String message) {
+        addMessageToRecyclerView(message);
+    }
+
+    private void addMessageToRecyclerView(String message) {
         this.adapter.addItem(message);
         recyclerView.scrollToPosition(adapter.getItemCount() - 1);
     }
-
 
     private static class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.ViewHolder> {
 
@@ -130,20 +135,26 @@ public class ChatActivity extends BaseActivity implements ChatView {
 
         public void addItem(String item) {
             this.items.add(item);
-            notifyDataSetChanged();
+            notifyItemInserted(items.size() - 1);
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            TextView v = (TextView) LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.message_list_item, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            return viewHolder;
+            View v =  LayoutInflater.from(viewGroup.getContext()) .inflate(R.layout.message_list_item, viewGroup, false);
+            return new ViewHolder(v);
         }
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
+            Picasso.with(viewHolder.imageView.getContext()).cancelRequest(viewHolder.imageView);
+            Picasso.with(viewHolder.imageView.getContext()).load("http://graph.facebook.com/" + getRandomUserId() + "/picture?type=square").into(viewHolder.imageView);
             viewHolder.textView.setText(items.get(i));
+            viewHolder.itemView.setTag(i);
+
+        }
+
+        private int getRandomUserId() {
+            return (int) (Math.random() * 1000);
         }
 
         @Override
@@ -153,10 +164,12 @@ public class ChatActivity extends BaseActivity implements ChatView {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public TextView textView;
-
-            public ViewHolder(TextView v) {
+            public ImageView imageView;
+            public ViewHolder(View v) {
                 super(v);
-                textView = v;
+                textView = (TextView) v.findViewById(R.id.chat_message_text);
+                imageView = (ImageView) v.findViewById(R.id.chat_message_profile_picture);
+
             }
         }
     }

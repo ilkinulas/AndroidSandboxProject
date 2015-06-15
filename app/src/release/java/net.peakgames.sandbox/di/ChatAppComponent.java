@@ -19,7 +19,7 @@ public interface ChatAppComponent {
     class Initializer {
         public static ChatAppComponent init(ChatApp app, boolean uiTestMode) {
             return DaggerChatAppComponent.builder()
-                    .chatAppModule(new ChatAppModule(app, uiTestMode))
+                    .chatAppModule(new ChatAppModule(app))
                     .build();
         }
     }

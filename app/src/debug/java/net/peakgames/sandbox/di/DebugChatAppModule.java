@@ -6,7 +6,6 @@ import net.peakgames.mobile.android.log.AndroidLogger;
 import net.peakgames.mobile.android.log.Logger;
 import net.peakgames.sandbox.ChatApp;
 import net.peakgames.sandbox.data.BooleanPreference;
-import net.peakgames.sandbox.di.annotations.IsMockMode;
 import net.peakgames.sandbox.di.annotations.LoggerLevel;
 import net.peakgames.sandbox.di.annotations.LoggerTag;
 import net.peakgames.sandbox.di.annotations.MockMode;
@@ -28,11 +27,11 @@ import dagger.Provides;
 import static android.content.Context.MODE_PRIVATE;
 
 @Module
-public class ChatAppModule {
+public class DebugChatAppModule {
     private ChatApp application;
     private boolean uiTesting;
 
-    public ChatAppModule(ChatApp app, boolean uiTesting) {
+    public DebugChatAppModule(ChatApp app, boolean uiTesting) {
         this.application = app;
         this.uiTesting = uiTesting;
     }
@@ -47,14 +46,6 @@ public class ChatAppModule {
     @Singleton
     public SharedPreferences provideSharedPreferences(ChatApp app) {
         return app.getSharedPreferences("KimbilirChallenge", MODE_PRIVATE);
-    }
-
-
-    @Singleton
-    @Provides
-    @IsMockMode
-    public boolean provideMockMode(@MockMode BooleanPreference mockModePreference) {
-        return mockModePreference.get();
     }
 
     @Singleton
@@ -75,8 +66,8 @@ public class ChatAppModule {
 
     @Provides
     @Singleton
-    public ChatService provideChatService(@IsMockMode boolean isMockMode, Logger log) {
-        if (isMockMode) {
+    public ChatService provideChatService(@MockMode BooleanPreference isMockMode, Logger log) {
+        if (isMockMode.get()) {
             log.d("MOCK Chat service created");
             return new MockChatService();
         } else {
@@ -84,9 +75,6 @@ public class ChatAppModule {
             return new ChatServiceImpl();
         }
     }
-
-
-
 
     @Provides
     @Singleton

@@ -24,7 +24,12 @@ public class ChatApp extends Application {
     }
 
     public void initComponentAndInject() {
-        chatAppComponent = ChatAppComponent.Initializer.init(this);
+        chatAppComponent = ChatAppComponent.Initializer.init(this, false);
+        chatAppComponent.inject(this);
+    }
+
+    public void initComponentAndInjectForUITest() {
+        chatAppComponent = ChatAppComponent.Initializer.init(this, true);
         chatAppComponent.inject(this);
     }
 

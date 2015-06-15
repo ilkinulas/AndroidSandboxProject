@@ -32,7 +32,7 @@ public class ChatActivityTest {
 
     @Before
     public void setup() {
-        ChatAppComponent.Initializer.init(getChatApp());
+        ChatAppComponent.Initializer.init(getChatApp(), true);
     }
 
     @Test

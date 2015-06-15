@@ -33,7 +33,8 @@ public class LoginActivityTest {
 
     @Before
     public void setup() {
-        ChatAppComponent.Initializer.init(getChatApp());
+        getChatApp().initComponentAndInjectForUITest();
+        ChatAppComponent.Initializer.init(getChatApp(), true);
         activity = activityRule.getActivity();
     }
 
@@ -56,7 +57,7 @@ public class LoginActivityTest {
     }
 
     @Test
-    public void test_deneme() {
+    public void chatShouldStartAfterValidUserName() {
         String username = "tayyip";
         onView(withId(R.id.username_edittext)).perform(typeText(username));
         onView(withId(R.id.login_button)).perform(click());

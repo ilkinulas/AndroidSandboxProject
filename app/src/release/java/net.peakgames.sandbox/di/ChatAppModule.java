@@ -30,7 +30,7 @@ public class ChatAppModule {
 
     private ChatApp application;
 
-    public ChatAppModule(ChatApp app) {
+    public ChatAppModule(ChatApp app, boolean uiTest) {
         this.application = app;
     }
 

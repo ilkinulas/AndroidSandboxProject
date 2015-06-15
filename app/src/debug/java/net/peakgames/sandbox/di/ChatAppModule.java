@@ -30,9 +30,11 @@ import static android.content.Context.MODE_PRIVATE;
 @Module
 public class ChatAppModule {
     private ChatApp application;
+    private boolean uiTesting;
 
-    public ChatAppModule(ChatApp app) {
+    public ChatAppModule(ChatApp app, boolean uiTesting) {
         this.application = app;
+        this.uiTesting = uiTesting;
     }
 
     @Singleton
@@ -89,7 +91,11 @@ public class ChatAppModule {
     @Provides
     @Singleton
     public LoginViewMediator provideLoginViewMediator(Logger log, ChatService chatService) {
-        return Mockito.mock(LoginViewMediator.class);
+        if (this.uiTesting) {
+            return Mockito.mock(LoginViewMediator.class);
+        } else {
+            return new LoginViewMediatorImpl(log, chatService);
+        }
     }
 
     @Provides

@@ -19,7 +19,7 @@ public class ChatServiceImpl implements ChatService  {
                 subscriber.onNext(LoginResponse.success());
                 subscriber.onCompleted();
             }
-        });
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override

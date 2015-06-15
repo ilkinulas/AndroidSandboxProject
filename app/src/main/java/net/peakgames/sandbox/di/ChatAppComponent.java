@@ -17,9 +17,9 @@ public interface ChatAppComponent {
     void inject(ChatActivity chatActivity);
 
     class Initializer {
-        public static ChatAppComponent init(ChatApp app) {
+        public static ChatAppComponent init(ChatApp app, boolean uiTestMode) {
             return DaggerChatAppComponent.builder()
-                    .chatAppModule(new ChatAppModule(app))
+                    .chatAppModule(new ChatAppModule(app, uiTestMode))
                     .build();
         }
     }

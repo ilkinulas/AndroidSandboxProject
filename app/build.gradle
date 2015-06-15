@@ -3,7 +3,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 configurations.all {
     resolutionStrategy {
-        force 'org.hamcrest:hamcrest-core:1.1'
+        force 'org.hamcrest:hamcrest-core:1.3'
     }
 }
 
@@ -54,7 +54,7 @@ dependencies {
     compile 'com.pusher:pusher-java-client:0.3.1'
     compile 'com.google.dagger:dagger:2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    debugCompile 'org.mockito:mockito-core:1.9.5'
+    debugCompile 'org.mockito:mockito-core:2.0.9-beta'
 
     apt 'com.google.dagger:dagger-compiler:2.0'
 
@@ -65,18 +65,18 @@ dependencies {
 
     // Testing-only dependencies
     androidTestCompile 'com.android.support:support-annotations:22.2.0'
-    androidTestCompile 'com.android.support.test:runner:0.2'
-    androidTestCompile 'com.android.support.test:rules:0.2'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
-    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+    androidTestCompile 'com.android.support.test:runner:0.3'
+    androidTestCompile 'com.android.support.test:rules:0.3'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
+    androidTestCompile 'org.mockito:mockito-core:2.0.9-beta'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
     androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile 'org.mockito:mockito-core:2.0.9-beta'
     testCompile 'io.reactivex:rxandroid:0.24.0'
     testCompile 'com.android.support:support-annotations:22.2.0'
-    testCompile 'com.android.support.test:runner:0.2'
-    testCompile 'com.android.support.test:rules:0.2'
+    testCompile 'com.android.support.test:runner:0.3'
+    testCompile 'com.android.support.test:rules:0.3'
     //TODO ayni dependency'yi hem compile hem de testCompile'a yazmak zorunda miyiz?
 }
